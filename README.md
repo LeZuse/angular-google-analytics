@@ -11,6 +11,7 @@ Proudly brought to you by the [@revolunet](http://twitter.com/revolunet) team.
  - events tracking
  - e-commerce tracking
  - multiple-domains
+ - custom variables
 
 ## example
 

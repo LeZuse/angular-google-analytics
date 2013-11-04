@@ -116,6 +116,20 @@ angular.module('angular-google-analytics', [])
             this._log('_trackTrans', arguments);
           };
 
+           /**
+            * Set custom variable
+            * @param index The slot for the custom variable. Required. This is a number whose value can range from 1 - 5, inclusive. A custom variable should be placed in one slot only and not be re-used across different slots.
+            * @param name The name for the custom variable. Required. This is a string that identifies the custom variable and appears in the top-level Custom Variables report of the Analytics reports.
+            * @param value The value for the custom variable. Required. This is a string that is paired with a name. You can pair a number of values with a custom variable name. The value appears in the table list of the UI for a selected variable name. Typically, you will have two or more values for a given name. For example, you might define a custom variable name gender and supply male and female as two possible values.
+            * @param opt_scope The scope for the custom variable. Optional. As described above, the scope defines the level of user engagement with your site. It is a number whose possible values are 1 (visitor-level), 2 (session-level), or 3 (page-level). When left undefined, the custom variable scope defaults to page-level interaction.
+            */
+            this._setCustomVar = function(index, name, value, opt_scope) {
+                if ($window._gaq) {
+                  $window._gaq.push(['_setCustomVar', index, name, value, opt_scope]);
+                }
+                this._log('_setCustomVar', arguments);
+            };
+
             // creates the ganalytics tracker
             _createScriptTag();
 
@@ -144,6 +158,9 @@ angular.module('angular-google-analytics', [])
                 },
                 trackTrans: function () {
                     me._trackTrans();
+                },
+                setCustomVar: function (index, name, value, opt_scope) {
+                    me._setCustomVar(index, name, value, opt_scope);
                 }
             };
         }];
